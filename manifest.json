@@ -1,0 +1,7 @@
+{
+  "name": "koktai-polymer",
+  "short_name": "koktai-polymer",
+  "description": "UI for Ngô&#39;s dictionary",
+  "start_url": "/",
+  "display": "standalone"
+}
