@@ -1,0 +1,49 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="./han-data.html">
+<dom-module id="koktai-index">
+  <template>
+    <style>
+    </style>
+    <han-data id="api" idx="{{index}}"></han-data>
+    <div>remplir l'index "ㄅㄚ"</div>
+    <div role="listbox">
+      <template is="dom-repeat" items="{{zhuyins}}">
+        <paper-item><a href="[[item.1]]"> [[item.0]]</a></paper-item>
+      </template>
+    </div>
+  </template>
+  <script>
+      class KoktaiIndex extends Polymer.Element {
+        static get is() { return 'koktai-index' }
+        static get properties() {
+          return {
+            'index': {
+              type: Object,
+              notify: true,
+              value: undefined
+            },
+            'zhuyins': {
+              type: Array,
+              value: [],
+              notify: true
+            }
+          }
+        }
+        static get observers() {
+          return [
+            '_idxUpdated(index)'
+          ]
+        }
+        
+        _idxUpdated(newIndex) {
+          if(newIndex === undefined) {return}
+          this.set('zhuyins', newIndex.getAll())
+        }
+
+      }
+      
+      window.customElements.define(KoktaiIndex.is, KoktaiIndex)
+  </script>
+</dom-module>

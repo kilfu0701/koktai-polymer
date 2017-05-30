@@ -1,0 +1,32 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="./han-data.html">
+<dom-module id="koktai-chapter">
+  <template>
+    <style>
+    </style>
+    <han-data id="api"/>
+    <div>[[chapter.zhuyin]]  ([[chapter.pinyin]])</div>
+    <div role="listbox">
+      <template is="dom-repeat" items="{{chapter.sinograms}}">
+        <paper-item>un sino</paper-item>
+      </template>
+    </div>
+  </template>
+  <script>
+      class KoktaiChapter extends Polymer.Element {
+        static get is() { return 'koktai-chapter' }
+        static get properties() {
+          return {
+            'chapter': {
+              type: Object,
+              notify: true,
+              value: undefined
+            },
+          }
+        }
+      }
+      
+      window.customElements.define(KoktaiChapter.is, KoktaiChapter)
+  </script>
+</dom-module>

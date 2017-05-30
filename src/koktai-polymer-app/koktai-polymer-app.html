@@ -12,6 +12,10 @@
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 
+<link rel="import" href="./koktai-index.html">
+<link rel="import" href="./koktai-chapter.html">
+<link rel="import" href="./han-data.html">
+
 <dom-module id="koktai-polymer-app">
   <template>
     <style>
@@ -53,6 +57,7 @@
       }
 
     </style>
+    <han-data id="api" root="data/" />
 	<app-location route="{{route}}"></app-location>
 	<app-route 
 		route="{{route}}"
@@ -96,7 +101,8 @@
                 <div name="introduction">介紹 tout ça</div>
                 <div name="licence">legal stuff</div>
                 <div name="preface">preface</div>
-                <div name="index">le dico en lui même</div>
+                <koktai-index name="index"></koktai-index>
+                <koktai-chapter name="chapter" chapter="{{chapter}}" />
             </iron-pages>
         </app-header-layout>
     </app-drawer-layout>
@@ -132,12 +138,23 @@
       
       _urlChanged(id1, id2) {
         console.log("should fetch "+id1+" , "+id2)
-        this.page = id1 || "intro"
+        if(["introduction", "licence", "preface", "index"].includes(id1)) {
+          this.page = id1;
+          return ;
+        }
+        this.$.api.getChapter(
+            id1,
+            ch => {
+            this.set('chapter',ch)
+            this.page = "chapter"
+            })
+        
+        
       }
       
       _pageChanged(page) {
         console.log("requesting "+page)
-        this.page = page
+        this.set("page",page)
       }
       
     }
