@@ -1,0 +1,46 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="./koktai-text.html">
+
+<dom-module id="han-ruby">
+  <template>
+    <style>
+
+      :host {
+        display: inline;
+      }
+    </style>
+    <ruby>
+      <rb><koktai-text-token token="[[text]]" /></rb>
+      <rtc class="romanization">
+        <rt>[[annot.s]]</rt>
+      </rtc>
+    </ruby>
+  </template>
+
+  <script>
+    /**
+     * `han-ruby`
+     * display sinogram(s) with ruby annotation
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class HanRuby extends Polymer.Element {
+      static get is() { return 'han-ruby'; }
+      static get properties() {  
+        return {
+          text: {
+            type: Object, notify: true
+            },
+           annot: {
+             type: String, notify: true
+           }
+         }
+      }
+    }
+
+    window.customElements.define(HanRuby.is, HanRuby);
+  </script>
+</dom-module>
+~                    

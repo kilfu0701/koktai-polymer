@@ -1,17 +1,28 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
 <link rel="import" href="./han-data.html">
+<link rel="import" href="./han-ruby.html">
+<link rel="import" href="./koktai-text-token.html">
+
 <dom-module id="koktai-chapter">
-  <template>
+  <template>  
     <style>
+    :host {
+     
+    }
     </style>
-    <han-data id="api"/>
+  <div id="maindiv" lang="zh-Hant">
     <div>[[chapter.zhuyin]]  ([[chapter.pinyin]])</div>
+    <koktai-text-token token="[[chapter.comment]]"></koktai-text-token>
+    <h3>Sinograms: </h3>
     <div role="listbox">
-      <template is="dom-repeat" items="{{chapter.sinograms}}">
-        <paper-item>un sino</paper-item>
+      <template is="dom-repeat" items="{{chapter.sinograms}}" restamp>
+        <paper-item>
+          <a href="/[[chapter.index]]/[[index]]"><han-ruby text="[[item.cjk]]" annot="[[item.ruby]]"></han-ruby></a>
+        </paper-item>
       </template>
     </div>
+  </div>
   </template>
   <script>
       class KoktaiChapter extends Polymer.Element {
@@ -23,7 +34,14 @@
               notify: true,
               value: undefined
             },
+            id: {
+              type: String
+            }
           }
+        }
+        ready() {
+          super.ready()
+          window.chapter = this
         }
       }
       

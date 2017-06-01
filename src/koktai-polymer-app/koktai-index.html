@@ -5,14 +5,18 @@
 <dom-module id="koktai-index">
   <template>
     <style>
+     :host {
+    }
     </style>
     <han-data id="api" idx="{{index}}"></han-data>
+  <div id="maindiv" lang="zh-Hant">
     <div>remplir l'index "ㄅㄚ"</div>
     <div role="listbox">
       <template is="dom-repeat" items="{{zhuyins}}">
         <paper-item><a href="[[item.1]]"> [[item.0]]</a></paper-item>
       </template>
     </div>
+  </div>
   </template>
   <script>
       class KoktaiIndex extends Polymer.Element {
@@ -35,6 +39,11 @@
           return [
             '_idxUpdated(index)'
           ]
+        }
+        
+        ready() {
+          super.ready()
+          Han(this.$.maindiv)
         }
         
         _idxUpdated(newIndex) {

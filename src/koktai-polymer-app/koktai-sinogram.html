@@ -1,0 +1,40 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="./han-data.html">
+<link rel="import" href="./koktai-text-token.html">
+
+<dom-module id="koktai-sinogram">
+  <template>
+    <style>
+    :host {
+
+    }
+    </style>
+    <div id="maindiv" lang="zh-Hant"> 
+      <koktai-text-token token="[[sinogram.cjk]]"></koktai-text-token> 
+      <koktai-text-token token="[[sinogram.ruby]]"></koktai-text-token> 
+    </div>
+    <koktai-text-token token="[[sinogram.comment]]"></koktai-text-token>
+  </template>
+  <script>
+      class KoktaiSinogram extends Polymer.Element {
+        static get is() { return 'koktai-sinogram' }
+        static get properties() {
+          return {
+            'sinogram': {
+              type: Object,
+              notify: true,
+              value: undefined
+            },
+          }
+        }
+        ready() {
+          super.ready()
+          window.sinogram = this
+         
+        }
+      }
+      
+      window.customElements.define(KoktaiSinogram.is, KoktaiSinogram)
+  </script>
+</dom-module>

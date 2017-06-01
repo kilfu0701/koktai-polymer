@@ -12,8 +12,12 @@
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 
+<script src="/css/han.js"></script>
+
+
 <link rel="import" href="./koktai-index.html">
 <link rel="import" href="./koktai-chapter.html">
+<link rel="import" href="./koktai-sinogram.html">
 <link rel="import" href="./han-data.html">
 
 <dom-module id="koktai-polymer-app">
@@ -22,7 +26,6 @@
       :host {
         --app-primary-color: #428542;
         --app-secondary-color: black;
-
         display: block;
       }
       
@@ -57,7 +60,7 @@
       }
 
     </style>
-    <han-data id="api" root="data/" />
+    <han-data id="api" root="/data/" />
 	<app-location route="{{route}}"></app-location>
 	<app-route 
 		route="{{route}}"
@@ -67,7 +70,8 @@
   	<app-route 
 		route="{{subroute}}"
 		pattern="/:id2"
-        data="{{subrouteData}}"></app-route>
+        data="{{subrouteData}}"
+        active="{{id2Active}}"></app-route>
     
     <app-drawer-layout fullbleed>
         <app-drawer id="drawer" slot="drawer">
@@ -77,10 +81,10 @@
                 attr-for-selected="name"
                 class="drawer-list"
                 role="navigation">
-                <a name="introduction" href="intro">介紹</a>
-                <a name="licence" href="licence">licence</a>
-                <a name="preface" href="preface">preface</a>                
-                <a name="index" href="index">辭典</a>
+                <a name="introduction" href="/intro">介紹</a>
+                <a name="licence" href="/licence">licence</a>
+                <a name="preface" href="/preface">preface</a>                
+                <a name="index" href="/index">辭典</a>
             </iron-selector>
         </app-drawer>
         
@@ -96,13 +100,16 @@
                 selected="[[page]]"
                 attr-for-selected="name"
                 fallback-selection="introduction"
-                role="main">
+                role="main"
+                id="pageDiv"
+                lang="zh-Hant">
                 
                 <div name="introduction">介紹 tout ça</div>
                 <div name="licence">legal stuff</div>
                 <div name="preface">preface</div>
                 <koktai-index name="index"></koktai-index>
-                <koktai-chapter name="chapter" chapter="{{chapter}}" />
+                <koktai-chapter id="chapterDiv" name="chapter" chapter="{{chapter}}"></koktai-chapter>
+                <koktai-sinogram id="sinogramDiv" name="sinogram" sinogram="{{sinogram}}" /></koktai-sinogram>
             </iron-pages>
         </app-header-layout>
     </app-drawer-layout>
@@ -132,29 +139,47 @@
       
       static get observers() {
         return [
-            '_urlChanged(routeData.id1, subrouteData.id2)',
+            '_chapterChanged(routeData.id1)',
+            '_sinogramChanged(subrouteData.id2)',
         ];
       }
       
-      _urlChanged(id1, id2) {
-        console.log("should fetch "+id1+" , "+id2)
+      _chapterChanged(id1) {
+        console.log("should fetch "+id1)
         if(["introduction", "licence", "preface", "index"].includes(id1)) {
           this.page = id1;
           return ;
         }
-        this.$.api.getChapter(
-            id1,
-            ch => {
-            this.set('chapter',ch)
-            this.page = "chapter"
-            })
-        
+        if(this.subrouteData.id2 === undefined || !this.id2Active) {
+            this.$.api.getChapter(
+                id1,
+                ch => {
+                this.set('chapter',ch)
+                this.page = "chapter"
+                })
+               
+        }
         
       }
+      
+      _sinogramChanged(id2) {
+        this.$.api.getSinogram(
+          this.routeData.id1,
+          id2,
+          s => {
+          console.log(s)
+            this.set('sinogram', s)
+            this.page = "sinogram"
+          })
+      }
+          
+
       
       _pageChanged(page) {
         console.log("requesting "+page)
         this.set("page",page)
+        Han(this.$.pageDiv).render()
+        window.han = Han
       }
       
     }

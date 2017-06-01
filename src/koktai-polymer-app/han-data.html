@@ -14,14 +14,14 @@
          },
          'root': {
            type: String,
-           value: "./"
+           value: "/data/"
          }
        }
       }
       ready() {
         super.ready()
         koktaiAPI.getIndex(
-            "index.pkl", 
+            this.root + "index.pkl", 
             idx => this.set('idx',idx)
             )
            
@@ -29,7 +29,7 @@
       }
       
       getChapter(n, cb) {
-        koktaiAPI.getChapter(this.root + "chpt-"+ n +".html", cb)
+        koktaiAPI.getChapter(this.root + "chpt-"+ n +".pkl", cb)
       }
       
       getSinogram(nc,ns , cb) {
