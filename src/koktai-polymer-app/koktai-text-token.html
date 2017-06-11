@@ -61,12 +61,12 @@
      }
        
      _updateType(token) {
-      // if(token.t === undefined) {return;}
-      //console.log(token)
-       this.set("isSimpleString", token.t == "SimpleString")
-       this.set("isCJKRuby", token.t == "CJKRuby")
-       this.set("isKoktaiCJK", token.t == "KoktaiCJK")
-       this.set("isText", token.t == "Text")
+        //console.log(token)
+        if(token === undefined) {return;}
+        this.set("isSimpleString", token.t == "SimpleString")
+        this.set("isCJKRuby", token.t == "CJKRuby")
+        this.set("isKoktaiCJK", token.t == "KoktaiCJK")
+        this.set("isText", token.t == "Text")
      }    
     }
     window.customElements.define(KoktaiTextToken.is, KoktaiTextToken);

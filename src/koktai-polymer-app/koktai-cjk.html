@@ -2,16 +2,23 @@
 <dom-module id="koktai-cjk">
   <template>
     <style>
-    @font-face {
-       font-family: 'k';
-       src: url('/font/koktai-k.woff') format('woff');
-     }
     :host {
        display: inline;
        font-family: 'k';
+       
+     }
+     em.k {
+       font-family: 'k';
+       font-style: normal;
+       border-bottom-width: 2px;
+       -webkit-text-emphasis: filled circle #555;
+       -webkit-text-emphasis-position: under;
+       text-emphasis: filled circle #555;
+       text-emphasis-position: under;
+       border-style: none;
      }
     </style>
-    <em>[[cjk]]</em>
+    <em lang="zh-Hant" class="k">[[cjk]]</em>
   </template>
   <script>
   class KoktaiCJK extends Polymer.Element {

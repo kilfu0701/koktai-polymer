@@ -11,7 +11,8 @@
 }
 .text {
     padding: 3px;
-} 󿩂 
+} 
+ 
 .part-of-speech {
     display: inline-block;
     padding-left: 10px;
@@ -21,24 +22,10 @@
 .homonym {
     padding-left: 3px;
 }
-h1 {
-    padding-left: 15px;
-    margin-bottom: 0;
-}
-body.han-init-context > div {
-    float: left;
-}
-rt {
-    font-size: 50%;
-}
-img {
-    width: 24px;
-    height: 24px;
-    border: 1px solid red;
-}
+
 @font-face {
     font-family: 'k';
-    src: url('/koktai-scala/font/koktai-k.woff') format('woff');
+    src: url('/font/koktai-k.woff') format('woff');
 }
 
 .k {

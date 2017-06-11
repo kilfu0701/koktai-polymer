@@ -4,16 +4,14 @@
 <dom-module id="han-ruby">
   <template>
     <style>
-
+      @import '/css/han.min.css';
       :host {
         display: inline;
       }
     </style>
-    <ruby>
-      <rb><koktai-text-token token="[[text]]" /></rb>
-      <rtc class="romanization">
-        <rt>[[annot.s]]</rt>
-      </rtc>
+    <ruby id="r" class="zhuyin">
+      <koktai-text-token token="[[text]]"></koktai-text-token>
+      <rt>[[annot]]</rt>
     </ruby>
   </template>
 

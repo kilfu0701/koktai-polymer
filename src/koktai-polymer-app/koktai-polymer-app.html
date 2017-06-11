@@ -12,16 +12,15 @@
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 
-<script src="/css/han.js"></script>
-
-
 <link rel="import" href="./koktai-index.html">
 <link rel="import" href="./koktai-chapter.html">
 <link rel="import" href="./koktai-sinogram.html">
 <link rel="import" href="./han-data.html">
 
+<link rel="stylesheet" media="all" href="/css/han.min.css" />
+
 <dom-module id="koktai-polymer-app">
-  <template>
+  <template>        
     <style>
       :host {
         --app-primary-color: #428542;
@@ -92,7 +91,7 @@
             <app-header slot="header" condenses reveals effects="waterfall">
                 <app-toolbar>
                     <paper-icon-button icon="menu" title="menu" drawer-toggle></paper-icon-button>
-                    <div main-title>Hello [[prop1]]! from [[routeData.id1]] [[subrouteData.id2]]</div>
+                    <div main-title>吳守禮《國臺對照活用辭典》</div>
                 </app-toolbar>
             </app-header>
             
@@ -104,7 +103,9 @@
                 id="pageDiv"
                 lang="zh-Hant">
                 
-                <div name="introduction">介紹 tout ça</div>
+                <div name="introduction" lang="zh-Hant" class="han-init">
+                  介紹    
+                </div>
                 <div name="licence">legal stuff</div>
                 <div name="preface">preface</div>
                 <koktai-index name="index"></koktai-index>
@@ -134,6 +135,15 @@
             reflectToAttribute: true,
             observer: '_pageChanged'
           },
+          sinogram: {
+            type: Object,
+            notify: true,
+          },       
+          chapter: {
+            type: Object,
+            notify: true,
+          },
+          id2Active: Boolean,
         };
       }
       
@@ -146,7 +156,8 @@
       
       _chapterChanged(id1) {
         console.log("should fetch "+id1)
-        if(["introduction", "licence", "preface", "index"].includes(id1)) {
+        if(id1 === undefined || id1 == "" || id1 == undefined) {return;}
+        if(["intro", "licence", "preface", "index"].includes(id1)) {
           this.page = id1;
           return ;
         }
@@ -163,6 +174,7 @@
       }
       
       _sinogramChanged(id2) {
+        if(id2 === undefined) {return;}
         this.$.api.getSinogram(
           this.routeData.id1,
           id2,
@@ -176,10 +188,12 @@
 
       
       _pageChanged(page) {
+        if(page == undefined) {return;}
         console.log("requesting "+page)
+     //   if(page == "sinogram") {this.notifyPath('sinogram.*');}
+     //   if(page == "chapter") {this.notifyPath('chapter.*')}
         this.set("page",page)
-        Han(this.$.pageDiv).render()
-        window.han = Han
+//        Han(this.$.pageDiv).render()
       }
       
     }

@@ -1,20 +1,52 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="./han-data.html">
 <link rel="import" href="./koktai-text-token.html">
+
 
 <dom-module id="koktai-sinogram">
   <template>
     <style>
     :host {
+    }
+    paper-card {
+        width: 100%;
+        margin: 10px;
 
     }
+    .card-header { 
+        @apply --paper-font-headline; 
+       
+
+    }
+    h3 {
+        display: inline;
+    }
     </style>
-    <div id="maindiv" lang="zh-Hant"> 
-      <koktai-text-token token="[[sinogram.cjk]]"></koktai-text-token> 
-      <koktai-text-token token="[[sinogram.ruby]]"></koktai-text-token> 
-    </div>
-    <koktai-text-token token="[[sinogram.comment]]"></koktai-text-token>
+
+    <paper-card id="maindiv" lang="zh-Hant" header="漢字">
+      <div class="card-content>
+        <div class="card-header">
+          <h2>
+          <koktai-text-token token="[[sinogram.cjk]]"></koktai-text-token> 
+          <koktai-text-token token="[[sinogram.ruby]]"></koktai-text-token> 
+          </h2>
+        </div>
+            <koktai-text-token token="[[sinogram.comment]]"></koktai-text-token>
+            <paper-listbox>
+                <template is="dom-repeat" items="{{sinogram.words}}" restamp>
+                  <paper-item>
+                    <div>
+                        <h3>【<koktai-text-token token="{{item.title}}"></koktai-text-token>】</h3>
+                        <koktai-text-token token="[[item.definition]]"></koktai-text-token><br/>
+                    </div>
+                  </paper-card>
+              </template>
+            <paper-listbox>
+       </div>
+    </paper-card>
   </template>
   <script>
       class KoktaiSinogram extends Polymer.Element {
@@ -24,14 +56,22 @@
             'sinogram': {
               type: Object,
               notify: true,
-              value: undefined
+              value: {words:[]},
+              observer: '_sinogramChanged'
             },
           }
+        }
+        _sinogramChanged(newValue, oldValue) {
+    //      window.Han(this.$.maindiv).render()    
+        }
+        attributeChangedCallback() {
+  //        window.Han(this.$.maindiv).render()
         }
         ready() {
           super.ready()
           window.sinogram = this
-         
+//          Han(this.$.maindiv).render()
+        
         }
       }
       
