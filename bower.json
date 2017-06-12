@@ -13,7 +13,9 @@
     "paper-card": "PolymerElements/paper-card#^2.0.0",
     "iron-list": "PolymerElements/iron-list#^2.0.0",
     "paper-listbox": "PolymerElements/paper-listbox#^2.0.0",
-    "paper-menu-button": "PolymerElements/paper-menu-button#^2.0.0"
+    "paper-menu-button": "PolymerElements/paper-menu-button#^2.0.0",
+    "neon-animation": "^2.0.0",
+    "web-animations-js": "^2.2.5"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
