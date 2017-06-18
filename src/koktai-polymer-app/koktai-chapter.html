@@ -1,10 +1,13 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../../bower_components/iron-list/iron-list.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/app-layout/app-grid/app-grid-style.html">
 <link rel="import" href="./han-data.html">
 <link rel="import" href="./han-ruby.html">
 <link rel="import" href="./koktai-text-token.html">
 <link rel="import" href="./koktai-sinogram.html">
+
 
 <dom-module id="koktai-chapter">
   <template>  
@@ -23,6 +26,11 @@
     <div>[[chapter.zhuyin]]  ([[chapter.pinyin]])</div>
     <koktai-text-token token="[[chapter.comment]]"></koktai-text-token>
     <h3>Sinograms: </h3>
+    <paper-listbox class="app-grid">
+        <template is="dom-repeat" items="[[chapter.sinograms]]" as="s" restamp>
+            <paper-button class="item" onclick=""><han-ruby annot="[[s.ruby]]" text="[[s.cjk]]"></han-ruby>  </paper-button>
+        </template>
+    </paper-listbox>
     <iron-list items="[[chapter.sinograms]]" as="item">
       <template> <!- is="dom-repeat" items="{{chapter.sinograms}}" restamp>
         <paper-item>

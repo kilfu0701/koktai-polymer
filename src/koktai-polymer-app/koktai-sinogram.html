@@ -4,6 +4,7 @@
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="./han-data.html">
 <link rel="import" href="./koktai-text-token.html">
+<link rel="import" href="./koktai-readings.html">
 
 
 <dom-module id="koktai-sinogram">
@@ -18,11 +19,18 @@
     }
     .card-header { 
         @apply --paper-font-headline; 
-       
 
     }
     h3 {
+       display: inline;
+    }
+    h2 {
         display: inline;
+    }
+    .fanqie {
+        -webkit-align-self: right;
+        text-align: right;
+        float: right;
     }
     </style>
 
@@ -31,11 +39,14 @@
         <div class="card-header">
           <h2>
           <koktai-text-token token="[[sinogram.cjk]]"></koktai-text-token> 
-          <koktai-text-token token="[[sinogram.ruby]]"></koktai-text-token> 
+          [[sinogram.ruby]]
           </h2>
+          <koktai-text-token class="fanqie" token="[[sinogram.comment]]"></koktai-text-token>
+          <br/>
         </div>
-            <koktai-text-token token="[[sinogram.comment]]"></koktai-text-token>
-            <paper-listbox>
+
+            <koktai-readings readings="[[sinogram.readings]]""></koktai-readings>
+            <div>
                 <template is="dom-repeat" items="{{sinogram.words}}" restamp>
                   <paper-item>
                     <div>
@@ -44,7 +55,7 @@
                     </div>
                   </paper-card>
               </template>
-            <paper-listbox>
+            </div>
        </div>
     </paper-card>
   </template>
