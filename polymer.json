@@ -5,7 +5,8 @@
     "font/**/*",
     "img/**/*",
     "js/**/*",
-    "vendor/**/*"
+    "vendor/**/*",
+    "bower_components/**/*"
   ],
   "lint": {
     "rules": [
