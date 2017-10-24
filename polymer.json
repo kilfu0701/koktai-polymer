@@ -1,4 +1,14 @@
 {
+  "sources": [
+    "css/**/*",
+    "data/**/*",
+    "font/**/*",
+    "img/**/*",
+    "js/**/*",
+    "vendor/**/*",
+    "bower_components/**/*",
+    "index.html"
+  ],
   "lint": {
     "rules": [
       "polymer-2"
