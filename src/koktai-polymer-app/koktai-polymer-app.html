@@ -155,12 +155,19 @@
       }
       
       _chapterChanged(id1) {
-        if (id1 === "") {
-          return ;
-        } else if (id1 === "dict") {
+        if (id1 === "" || id1 === "dict") {
           id1 = "index";
         } else if (id1 === "top") {
           window.location.href = "/";
+        }
+
+        var hash_arr = location.hash.split('#!/');
+        if (hash_arr.length === 2 && (hash_arr[1] !== "dict")) {
+          if (hash_arr[1] === "top") {
+            window.location.href = "/";
+          }
+
+          id1 = hash_arr[1];
         }
 
         if(id1 === undefined || id1 == "" || id1 == undefined) {return;}
@@ -195,7 +202,9 @@
 
       
       _pageChanged(page) {
-        if(page == undefined) {return;}
+        if (page == undefined || location.pathname === "/") {
+            return;
+        }
         console.log("requesting "+page)
      //   if(page == "sinogram") {this.notifyPath('sinogram.*');}
      //   if(page == "chapter") {this.notifyPath('chapter.*')}

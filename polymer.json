@@ -5,6 +5,7 @@
     "font/**/*",
     "img/**/*",
     "js/**/*",
+    "src/**/*",
     "vendor/**/*",
     "bower_components/**/*",
     "index.html"
