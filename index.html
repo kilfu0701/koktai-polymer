@@ -55,13 +55,13 @@
               <a href="#page-top"></a>
             </li>
             <li>
-              <a class="page-scroll" href="#about">關於我</a>
+              <a class="page-scroll" href="#about" id="nav_about">關於我</a>
             </li>
             <li>
               <a class="" href="/#!dict">辭典</a>
             </li>
             <li>
-              <a class="page-scroll" href="#contact">聯繫我們</a>
+              <a class="page-scroll" href="#contact" id="nav_contact">聯繫我們</a>
             </li>
           </ul>
         </div>
@@ -159,6 +159,9 @@
         $('<link>').attr("href", "/src/koktai-polymer-app/koktai-polymer-app.html").attr("rel", "import").appendTo('head');
         $('#dictionary').removeClass('hide');
         $('.intro, #about, #contact').addClass('hide');
+        $('#nav_about, #nav_contact').on('click', function(e) {
+          location.href = '/?';
+        });
       }
       page({hashbang: true});
     });
