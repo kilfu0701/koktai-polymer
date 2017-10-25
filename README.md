@@ -1,6 +1,7 @@
 # \<koktai-polymer\>
 
 UI for Ngô&#39;s dictionary
+(see https://github.com/Wikimedia-TW/koktai-rawscan for information about original data)
 
 ## Install the Polymer-CLI
 
